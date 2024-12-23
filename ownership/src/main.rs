@@ -48,6 +48,7 @@ fn main() {
     println!("{}", s3); // s2 is moved into
                         // takes_and_gives_back, which also
                         // moves its return value into s3
+    return_tuples();
 } // Here, s3 goes out of scope and is dropped. s2 goes out of scope but was
   // moved, so nothing happens. s1 goes out of scope and is dropped.
 
@@ -73,4 +74,16 @@ fn takes_ownership(some_string: String) {
 
 fn make_copy(some_integer: i32) {
     println!("{}", some_integer);
+}
+
+fn return_tuples() {
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+    println!("The length of '{}' is {}", s2, len);
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len(); // len() returns the length of a String
+    (s, length)
 }
